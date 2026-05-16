@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AllfawiseHR | Gestão de RH Moderna</title>
+  <meta name="description" content="AllfawiseHR é uma plataforma moderna para gestão de funcionários, folha de pagamento, recrutamento e avaliação de desempenho." />
+
+  <style>
+    :root {
+      --blue-900: #0b1f4d;
+      --blue-800: #123a7a;
+      --blue-700: #1554c0;
+      --blue-600: #1d6ff2;
+      --blue-100: #eaf3ff;
+      --blue-50: #f5f9ff;
+      --white: #ffffff;
+      --gray-900: #101828;
+      --gray-700: #344054;
+      --gray-500: #667085;
+      --gray-200: #eaecf0;
+      --shadow: 0 20px 50px rgba(21, 84, 192, 0.12);
+      --radius: 22px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--white);
+      color: var(--gray-900);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(234, 236, 240, 0.8);
+    }
+
+    .nav-content {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: var(--blue-900);
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue-700), var(--blue-600));
+      color: var(--white);
+      font-weight: 900;
+      box-shadow: 0 10px 24px rgba(29, 111, 242, 0.25);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+      color: var(--gray-700);
+      font-weight: 600;
+      font-size: 0.96rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue-600);
+    }
+
+    .nav-cta {
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--blue-600);
+      color: var(--white);
+      font-weight: 700;
+      box-shadow: 0 12px 28px rgba(29, 111, 242, 0.24);
+      transition: 0.25s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      background: var(--blue-700);
+    }
+
+    .menu-btn {
+      display: none;
+      border: none;
+      background: var(--blue-100);
+      color: var(--blue-800);
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 150px 0 92px;
+      background:
+        radial-gradient(circle at top right, rgba(29, 111, 242, 0.18), transparent 34%),
+        linear-gradient(180deg, var(--blue-50), var(--white));
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 54px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid rgba(29, 111, 242, 0.18);
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--blue-700);
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.7rem, 6vw, 5.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+      color: var(--blue-900);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      color: var(--blue-600);
+    }
+
+    .hero p {
+      font-size: 1.18rem;
+      color: var(--gray-500);
+      max-width: 610px;
+      margin-bottom: 34px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 22px;
+      border-radius: 14px;
+      font-weight: 800;
+      transition: 0.25s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--blue-600);
+      color: var(--white);
+      box-shadow: 0 16px 34px rgba(29, 111, 242, 0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      background: var(--blue-700);
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--blue-800);
+      border: 1px solid var(--gray-200);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      border-color: rgba(29, 111, 242, 0.32);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 28px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(234, 236, 240, 0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .dashboard {
+      background: var(--white);
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+    }
+
+    .dash-header {
+      padding: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .dash-title {
+      font-weight: 800;
+      color: var(--blue-900);
+    }
+
+    .dot-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--blue-600);
+      opacity: 0.35;
+    }
+
+    .dash-body {
+      padding: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .metric {
+      padding: 16px;
+      border-radius: 18px;
+      background: var(--blue-50);
+      border: 1px solid rgba(29, 111, 242, 0.08);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--blue-900);
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+
+    .metric span {
+      color: var(--gray-500);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .list-card {
+      padding: 16px;
+      border: 1px solid var(--gray-200);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .person {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-100));
+    }
+
+    .person strong {
+      display: block;
+      color: var(--gray-900);
+    }
+
+    .person span {
+      color: var(--gray-500);
+      font-size: 0.88rem;
+    }
+
+    .status {
+      padding: 7px 11px;
+      background: #ecfdf3;
+      color: #027a48;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.78rem;
+    }
+
+    /* Sections */
+    section {
+      padding: 92px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 52px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      color: var(--blue-900);
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      color: var(--gray-500);
+      font-size: 1.08rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      padding: 28px;
+      border-radius: var(--radius);
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      box-shadow: 0 12px 30px rgba(16, 24, 40, 0.04);
+      transition: 0.25s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow);
+      border-color: rgba(29, 111, 242, 0.22);
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--blue-100);
+      color: var(--blue-700);
+      font-size: 1.55rem;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      color: var(--blue-900);
+      margin-bottom: 10px;
+      font-size: 1.12rem;
+    }
+
+    .feature-card p {
+      color: var(--gray-500);
+      font-size: 0.95rem;
+    }
+
+    /* Pricing */
+    .pricing {
+      background: linear-gradient(180deg, var(--blue-50), var(--white));
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .price-card {
+      position: relative;
+      padding: 34px;
+      border-radius: 28px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      box-shadow: 0 12px 30px rgba(16, 24, 40, 0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .price-card.featured {
+      border: 2px solid var(--blue-600);
+      transform: scale(1.03);
+      box-shadow: var(--shadow);
+    }
+
+    .popular {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      padding: 7px 11px;
+      background: var(--blue-600);
+      color: var(--white);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .price-card h3 {
+      color: var(--blue-900);
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+    }
+
+    .price-card .desc {
+      color: var(--gray-500);
+      min-height: 52px;
+      margin-bottom: 22px;
+    }
+
+    .price {
+      font-size: 2.7rem;
+      font-weight: 900;
+      color: var(--blue-900);
+      letter-spacing: -0.04em;
+      margin-bottom: 18px;
+    }
+
+    .price span {
+      font-size: 1rem;
+      color: var(--gray-500);
+      font-weight: 700;
+    }
+
+    .price-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin: 20px 0 28px;
+      color: var(--gray-700);
+    }
+
+    .price-list li::before {
+      content: "✓";
+      color: var(--blue-600);
+      font-weight: 900;
+      margin-right: 8px;
+    }
+
+    .price-card .btn-primary,
+    .price-card .btn-secondary {
+      margin-top: auto;
+      width: 100%;
+    }
+
+    /* CTA */
+    .final-cta {
+      padding: 76px 0;
+    }
+
+    .cta-box {
+      padding: 52px;
+      border-radius: 34px;
+      background: linear-gradient(135deg, var(--blue-900), var(--blue-600));
+      color: var(--white);
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box h2 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 14px;
+    }
+
+    .cta-box p {
+      max-width: 640px;
+      margin: 0 auto 28px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 1.08rem;
+    }
+
+    .cta-box .btn-primary {
+      background: var(--white);
+      color: var(--blue-800);
+      box-shadow: none;
+    }
+
+    .cta-box .btn-primary:hover {
+      background: var(--blue-100);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 54px 0 30px;
+      background: var(--blue-900);
+      color: var(--white);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr 0.8fr;
+      gap: 30px;
+      margin-bottom: 34px;
+    }
+
+    .footer h4 {
+      margin-bottom: 14px;
+      font-size: 1rem;
+    }
+
+    .footer p,
+    .footer a {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.95rem;
+    }
+
+    .footer ul {
+      list-style: none;
+      display: grid;
+      gap: 9px;
+    }
+
+    .footer a:hover {
+      color: var(--white);
+    }
+
+    .footer-bottom {
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.13);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.92rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: 0.7s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .pricing-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .price-card.featured {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .menu-btn {
+        display: grid;
+        place-items: center;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 78px;
+        left: 4%;
+        width: 92%;
+        padding: 20px;
+        border-radius: 20px;
+        background: var(--white);
+        border: 1px solid var(--gray-200);
+        box-shadow: var(--shadow);
+        flex-direction: column;
+        align-items: stretch;
+        display: none;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-cta {
+        text-align: center;
+      }
+
+      .hero {
+        padding-top: 130px;
+      }
+
+      .metric-row,
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .cta-box {
+        padding: 26px;
+      }
+
+      section {
+        padding: 70px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="#home" class="logo" aria-label="AllfawiseHR Home">
+        <span class="logo-icon">A</span>
+        <span>AllfawiseHR</span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">Início</a></li>
+          <li><a href="#features">Funcionalidades</a></li>
+          <li><a href="#pricing">Preços</a></li>
+          <li><a href="#contact">Contato</a></li>
+          <li><a href="#pricing" class="nav-cta">Começar agora</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="badge">RH inteligente para empresas modernas</div>
+          <h1>Gerencie pessoas com mais clareza, velocidade e <span>estratégia.</span></h1>
+          <p>
+            A AllfawiseHR centraliza gestão de funcionários, folha de pagamento,
+            recrutamento e desempenho em uma plataforma simples, profissional e escalável.
+          </p>
+          <div class="hero-actions">
+            <a href="#pricing" class="btn-primary">Solicitar demonstração</a>
+            <a href="#features" class="btn-secondary">Ver funcionalidades</a>
+          </div>
+        </div>
+
+        <div class="hero-card reveal">
+          <div class="dashboard">
+            <div class="dash-header">
+              <span class="dash-title">Painel de RH</span>
+              <div class="dot-group">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+            </div>
+            <div class="dash-body">
+              <div class="metric-row">
+                <div class="metric">
+                  <strong>248</strong>
+                  <span>Funcionários</span>
+                </div>
+                <div class="metric">
+                  <strong>36</strong>
+                  <span>Vagas abertas</span>
+                </div>
+                <div class="metric">
+                  <strong>94%</strong>
+                  <span>Engajamento</span>
+                </div>
+              </div>
+
+              <div class="list-card">
+                <div class="person">
+                  <div class="avatar"></div>
+                  <div>
+                    <strong>Ana Oliveira</strong>
+                    <span>Admissão concluída</span>
+                  </div>
+                </div>
+                <span class="status">Ativo</span>
+              </div>
+
+              <div class="list-card">
+                <div class="person">
+                  <div class="avatar"></div>
+                  <div>
+                    <strong>Relatório mensal</strong>
+                    <span>Folha e desempenho atualizados</span>
+                  </div>
+                </div>
+                <span class="status">Pronto</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Funcionalidades feitas para simplificar o RH</h2>
+          <p>Organize processos, reduza tarefas manuais e transforme dados de pessoas em decisões estratégicas.</p>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon">👥</div>
+            <h3>Gestão de funcionários</h3>
+            <p>Centralize dados, cargos, documentos, histórico profissional e informações importantes da equipe.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">💳</div>
+            <h3>Folha de pagamento</h3>
+            <p>Controle salários, benefícios, pagamentos, relatórios e processos financeiros do time com segurança.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🎯</div>
+            <h3>Recrutamento</h3>
+            <p>Gerencie candidatos, etapas seletivas, entrevistas e aprovações em um fluxo claro e moderno.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">📈</div>
+            <h3>Avaliação de desempenho</h3>
+            <p>Acompanhe metas, feedbacks, produtividade e evolução profissional com relatórios objetivos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Planos simples para cada fase da empresa</h2>
+          <p>Escolha o plano ideal para começar com organização e evoluir com inteligência.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="price-card reveal">
+            <h3>Starter</h3>
+            <p class="desc">Para pequenos times que precisam organizar o básico do RH.</p>
+            <div class="price">$29<span>/mês</span></div>
+            <ul class="price-list">
+              <li>Até 25 funcionários</li>
+              <li>Cadastro de colaboradores</li>
+              <li>Controle de documentos</li>
+              <li>Suporte por e-mail</li>
+            </ul>
+            <a href="#contact" class="btn-secondary">Começar</a>
+          </article>
+
+          <article class="price-card featured reveal">
+            <span class="popular">Mais popular</span>
+            <h3>Professional</h3>
+            <p class="desc">Para empresas em crescimento que querem automatizar processos.</p>
+            <div class="price">$79<span>/mês</span></div>
+            <ul class="price-list">
+              <li>Até 100 funcionários</li>
+              <li>Folha de pagamento</li>
+              <li>Recrutamento completo</li>
+              <li>Relatórios avançados</li>
+            </ul>
+            <a href="#contact" class="btn-primary">Solicitar demo</a>
+          </article>
+
+          <article class="price-card reveal">
+            <h3>Enterprise</h3>
+            <p class="desc">Para operações maiores que precisam de personalização e escala.</p>
+            <div class="price">Custom<span>/mês</span></div>
+            <ul class="price-list">
+              <li>Funcionários ilimitados</li>
+              <li>Integrações personalizadas</li>
+              <li>Gestor de conta dedicado</li>
+              <li>Segurança avançada</li>
+            </ul>
+            <a href="#contact" class="btn-secondary">Falar com vendas</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" id="contact">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h2>Pronto para modernizar seu RH?</h2>
+          <p>Comece a construir uma operação de pessoas mais organizada, profissional e preparada para crescer.</p>
+          <a href="mailto:contact@allfawisehr.com" class="btn-primary">Entrar em contato</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo" style="color: white; margin-bottom: 14px;">
+            <span class="logo-icon">A</span>
+            <span>AllfawiseHR</span>
+          </div>
+          <p>Uma solução moderna para empresas que querem transformar gestão de pessoas em vantagem competitiva.</p>
+        </div>
+
+        <div>
+          <h4>Produto</h4>
+          <ul>
+            <li><a href="#features">Funcionalidades</a></li>
+            <li><a href="#pricing">Preços</a></li>
+            <li><a href="#contact">Demonstração</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#home">Sobre</a></li>
+            <li><a href="#contact">Contato</a></li>
+            <li><a href="#features">Soluções</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contato</h4>
+          <ul>
+            <li><a href="mailto:contact@allfawisehr.com">contact@allfawisehr.com</a></li>
+            <li><a href="tel:+14074540101">+1 (407) 454-0101</a></li>
+            <li><a href="#home">Orlando, FL</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> AllfawiseHR. Todos os direitos reservados.</span>
+        <span>Human Resources. Simplified.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      menuBtn.textContent = navLinks.classList.contains('open') ? '×' : '☰';
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuBtn.textContent = '☰';
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealOnScroll = () => {
+      const windowHeight = window.innerHeight;
+      revealElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 90) {
+          element.classList.add('active');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+  </script>
+</body>
+</html>
