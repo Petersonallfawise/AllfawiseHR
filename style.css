@@ -73,3 +73,9 @@ body {
   .cards-grid { grid-template-columns: repeat(2, 1fr); }
   .jobs-grid { grid-template-columns: 1fr; }
 }
+
+.form-intro { max-width: 600px; margin: 0 auto 20px; text-align: center; }
+.form-intro h2 { margin-top: 0; }
+.lead-form { margin: 0 auto; }
+.lead-form textarea { padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; font-family: inherit; resize: vertical; }
+.lead-form button:disabled { opacity: 0.6; cursor: not-allowed; }
