@@ -48,7 +48,11 @@
 
 <section class="section section-alt">
   <div class="container">
-    <h2>Cadastre seu interesse</h2>
+    <div class="form-intro">
+      <h2>Cadastre-se para a oportunidade de Live Seller</h2>
+      <p>Preencha seus dados e nossa equipe entrará em contato com você com mais informações sobre a oportunidade.</p>
+    </div>
+
     <form id="leadForm" class="lead-form">
       <label for="nome">Nome completo</label>
       <input type="text" id="nome" name="nome" required>
@@ -56,26 +60,55 @@
       <label for="whatsapp">WhatsApp</label>
       <input type="tel" id="whatsapp" name="whatsapp" required>
 
-      <label for="cidade">Cidade / Estado</label>
+      <label for="cidade">Cidade</label>
       <input type="text" id="cidade" name="cidade" required>
 
-      <label for="idade">Você tem 18 anos ou mais?</label>
+      <label for="estado">Estado</label>
+      <input type="text" id="estado" name="estado" required>
+
+      <label for="idade">Você tem mais de 18 anos?</label>
       <select id="idade" name="idade" required>
         <option value="">Selecione</option>
         <option value="Sim">Sim</option>
         <option value="Não">Não</option>
       </select>
 
-      <label for="interesse">Tenho interesse em saber mais sobre:</label>
-      <select id="interesse" name="interesse" required>
+      <label for="comunicativa">Você se considera uma pessoa comunicativa?</label>
+      <select id="comunicativa" name="comunicativa" required>
         <option value="">Selecione</option>
-        <option value="Vaga de Live Seller">Vaga de Live Seller</option>
-        <option value="Live Service / Atendimento digital">Live Service / Atendimento digital</option>
-        <option value="Banco de talentos Allfawise">Banco de talentos Allfawise</option>
-        <option value="Quero saber qual oportunidade combina comigo">Quero saber qual oportunidade combina comigo</option>
+        <option value="Sim">Sim</option>
+        <option value="Mais ou menos">Mais ou menos</option>
+        <option value="Não">Não</option>
       </select>
 
-      <button type="submit" class="btn btn-primary">Enviar cadastro</button>
+      <label for="temCelular">Você tem celular com internet?</label>
+      <select id="temCelular" name="temCelular" required>
+        <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <label for="trabalharCasa">Você gostaria de trabalhar de casa?</label>
+      <select id="trabalharCasa" name="trabalharCasa" required>
+        <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Talvez">Talvez</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <label for="experiencia">Você já tem experiência com vendas, atendimento ou redes sociais?</label>
+      <select id="experiencia" name="experiencia" required>
+        <option value="">Selecione</option>
+        <option value="Sim, com vendas">Sim, com vendas</option>
+        <option value="Sim, com atendimento">Sim, com atendimento</option>
+        <option value="Sim, com redes sociais">Sim, com redes sociais</option>
+        <option value="Não tenho experiência">Não tenho experiência</option>
+      </select>
+
+      <label for="mensagem">Por que você tem interesse nessa oportunidade?</label>
+      <textarea id="mensagem" name="mensagem" rows="4"></textarea>
+
+      <button type="submit" class="btn btn-primary">Quero me cadastrar</button>
       <p id="formMessage" class="form-message"></p>
     </form>
   </div>
