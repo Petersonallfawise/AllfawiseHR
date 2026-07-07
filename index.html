@@ -341,8 +341,6 @@
           <h3>Cadastre seu interesse</h3>
           <p>Preencha seus dados para saber mais sobre oportunidades de Live Seller, Live Service e banco de talentos.</p>
           <form class="lead-form" id="leadForm">
-            <input type="hidden" name="origem" value="Site Allfawise - Cadastro de Interesse" />
-
             <label>
               Nome completo
               <input type="text" name="nome" placeholder="Digite seu nome" required />
@@ -352,26 +350,65 @@
               <input type="tel" name="whatsapp" placeholder="Ex: +1 407 454 0102" required />
             </label>
             <label>
-              Cidade / Estado
-              <input type="text" name="cidade" placeholder="Ex: Orlando, FL" required />
+              Cidade
+              <input type="text" name="cidade" placeholder="Ex: Orlando" required />
             </label>
             <label>
-              Você tem 18 anos ou mais?
-              <select name="maioridade" required>
+              Estado
+              <input type="text" name="estado" placeholder="Ex: FL" required />
+            </label>
+            <label>
+              Idade
+              <input type="number" name="idade" placeholder="Ex: 25" min="1" required />
+            </label>
+            <label>
+              Você se considera uma pessoa comunicativa?
+              <select name="comunicativa" required>
                 <option value="">Selecione uma opção</option>
-                <option value="Sim">Sim, tenho 18 anos ou mais</option>
-                <option value="Não">Não, sou menor de 18 anos</option>
+                <option value="Sim">Sim</option>
+                <option value="Mais ou menos">Mais ou menos</option>
+                <option value="Ainda tenho dificuldade, mas quero aprender">Ainda tenho dificuldade, mas quero aprender</option>
               </select>
             </label>
             <label>
-              Tenho interesse em saber mais sobre:
-              <select name="interesse" required>
+              Você tem celular com câmera e internet?
+              <select name="tem_celular" required>
                 <option value="">Selecione uma opção</option>
-                <option value="Vaga de Live Seller">Vaga de Live Seller</option>
-                <option value="Live Service / Atendimento digital">Live Service / Atendimento digital</option>
-                <option value="Banco de talentos Allfawise">Banco de talentos Allfawise</option>
-                <option value="Quero saber qual oportunidade combina comigo">Quero saber qual oportunidade combina comigo</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
               </select>
+            </label>
+            <label>
+              Você gostaria de trabalhar de casa usando o celular?
+              <select name="trabalhar_casa" required>
+                <option value="">Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Talvez, quero entender melhor">Talvez, quero entender melhor</option>
+                <option value="Não">Não</option>
+              </select>
+            </label>
+            <label>
+              Você já tem experiência com vendas, atendimento, lives ou redes sociais?
+              <select name="experiencia" required>
+                <option value="">Selecione uma opção</option>
+                <option value="Sim, com vendas">Sim, com vendas</option>
+                <option value="Sim, com atendimento">Sim, com atendimento</option>
+                <option value="Sim, com redes sociais">Sim, com redes sociais</option>
+                <option value="Sim, com lives">Sim, com lives</option>
+                <option value="Não, mas quero aprender">Não, mas quero aprender</option>
+              </select>
+            </label>
+            <label>
+              Seu perfil do TikTok
+              <input type="text" name="tiktok" placeholder="Cole o link do seu TikTok ou seu @" />
+            </label>
+            <label>
+              Seu perfil do Instagram
+              <input type="text" name="instagram" placeholder="Cole o link do seu Instagram ou seu @" />
+            </label>
+            <label>
+              Mensagem
+              <textarea name="mensagem" placeholder="Conte rapidamente por que você tem interesse nessa oportunidade" rows="4"></textarea>
             </label>
             <button type="submit" class="btn btn-orange">Enviar interesse</button>
             <p class="form-note" id="formMessage">Seus dados serão usados apenas para contato sobre oportunidades da Allfawise.</p>
