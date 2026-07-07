@@ -4,13 +4,16 @@ function doPost(e) {
 
   sheet.appendRow([
     new Date(),
-    data.nome,
-    data.whatsapp,
-    data.cidade,
-    data.idade,
-    data.interesse,
-    data.origem,
-    data.dataEnvio
+    data.nome || "",
+    data.whatsapp || "",
+    data.cidade || "",
+    data.estado || "",
+    data.idade || "",
+    data.comunicativa || "",
+    data.temCelular || "",
+    data.trabalharCasa || "",
+    data.experiencia || "",
+    data.mensagem || ""
   ]);
 
   return ContentService
