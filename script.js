@@ -16,16 +16,23 @@ if (leadForm) {
   leadForm.addEventListener('submit', function (e) {
     e.preventDefault();
     const formMessage = document.getElementById('formMessage');
+    const submitBtn = leadForm.querySelector('button[type="submit"]');
 
     const data = {
       nome: document.getElementById('nome').value,
       whatsapp: document.getElementById('whatsapp').value,
       cidade: document.getElementById('cidade').value,
+      estado: document.getElementById('estado').value,
       idade: document.getElementById('idade').value,
-      interesse: document.getElementById('interesse').value,
-      origem: "Site Allfawise - Live Seller",
-      dataEnvio: new Date().toISOString()
+      comunicativa: document.getElementById('comunicativa').value,
+      temCelular: document.getElementById('temCelular').value,
+      trabalharCasa: document.getElementById('trabalharCasa').value,
+      experiencia: document.getElementById('experiencia').value,
+      mensagem: document.getElementById('mensagem').value
     };
+
+    formMessage.textContent = "Enviando cadastro...";
+    if (submitBtn) submitBtn.disabled = true;
 
     fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
@@ -34,11 +41,14 @@ if (leadForm) {
       body: JSON.stringify(data)
     })
       .then(() => {
-        formMessage.textContent = "Cadastro enviado com sucesso. A Allfawise entrará em contato.";
+        formMessage.textContent = "Cadastro enviado com sucesso! Nossa equipe entrará em contato.";
         leadForm.reset();
       })
       .catch(() => {
-        formMessage.textContent = "Ocorreu um erro ao enviar. Tente novamente.";
+        formMessage.textContent = "Erro ao enviar. Tente novamente ou chame no WhatsApp.";
+      })
+      .finally(() => {
+        if (submitBtn) submitBtn.disabled = false;
       });
   });
 }
