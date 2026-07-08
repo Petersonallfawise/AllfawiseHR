@@ -153,6 +153,7 @@ section { padding: 86px 0; }
 .section-head p { color: var(--gray); font-size: 1.08rem; }
 
 .cards-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .icon-card {
   background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
   padding: 24px; box-shadow: 0 10px 28px rgba(17,24,39,0.04);
@@ -284,7 +285,7 @@ footer b { color: white; }
   }
   .nav-links.open { display: flex; }
   .hero-grid, .split, .live-grid, .company-card { grid-template-columns: 1fr; }
-  .cards-4, .plan-grid { grid-template-columns: repeat(2, 1fr); }
+  .cards-4, .cards-3, .plan-grid { grid-template-columns: repeat(2, 1fr); }
   .form-box { position: static; }
 }
 
@@ -294,7 +295,7 @@ footer b { color: white; }
   .hero { padding-top: 54px; }
   .hero-actions, .footer-grid { align-items: stretch; flex-direction: column; }
   .btn { width: 100%; }
-  .trust-row, .cards-4, .opportunities-grid, .plan-grid, .metric-row { grid-template-columns: 1fr; }
+  .trust-row, .cards-4, .cards-3, .opportunities-grid, .plan-grid, .metric-row { grid-template-columns: 1fr; }
   .talent-window { min-height: 360px; }
   section { padding: 64px 0; }
 }
