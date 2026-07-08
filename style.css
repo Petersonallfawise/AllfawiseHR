@@ -230,6 +230,11 @@ section { padding: 86px 0; }
 .timeline-closing { margin-top: 22px; font-size: 1.05rem; font-weight: 650; color: var(--dark); text-align: center; line-height: 1.5; }
 .timeline-item p + p { margin-top: 10px; }
 
+/* ---------- NAVEGAÇÃO PROGRESSIVA (FLUXO) ---------- */
+.flow-hidden { display: none !important; }
+section:not(.flow-hidden) { animation: flowFadeIn 0.45s ease; }
+@keyframes flowFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
 /* ---------- FORMULÁRIO ---------- */
 .form-box { background: var(--white); color: var(--dark); border-radius: 32px; padding: 30px; box-shadow: var(--shadow); position: sticky; top: 104px; }
 .form-box h3 { font-size: 1.55rem; letter-spacing: -0.04em; margin-bottom: 8px; }
