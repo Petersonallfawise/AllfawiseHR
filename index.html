@@ -434,66 +434,128 @@
         </div>
         <div class="form-box">
           <h3>Cadastro para Outras Vagas</h3>
-          <p>Este formulário ainda não está conectado ao envio final. Nesta etapa, é apenas a
-            estrutura visual da nova ficha de candidatura.</p>
-          <form class="lead-form form-robust" id="generalJobsForm" onsubmit="event.preventDefault(); this.querySelector('.form-note').textContent='Formulário em preparação — envio ainda não está ativo nesta etapa.';">
-            <label>Nome completo
-              <input type="text" name="nome" placeholder="Digite seu nome">
-            </label>
-            <label>WhatsApp
-              <input type="tel" name="whatsapp" placeholder="Ex: +1 407 454 0102">
-            </label>
-            <label>E-mail
-              <input type="email" name="email" placeholder="seuemail@exemplo.com">
-            </label>
-            <label>Vaga de interesse
-              <select name="vagaEscolhida">
-                <option value="">Selecione uma opção</option>
-                <option value="Live Service">Live Service</option>
-                <option value="Social Commerce">Social Commerce</option>
-                <option value="IA aplicada ao trabalho digital">IA aplicada ao trabalho digital</option>
-                <option value="Banco de Talentos">Banco de Talentos</option>
-                <option value="Outra">Outra</option>
-              </select>
-            </label>
-            <label>Cidade
-              <input type="text" name="cidade" placeholder="Ex: Orlando">
-            </label>
-            <label>Estado
-              <input type="text" name="estado" placeholder="Ex: FL">
-            </label>
-            <label>Link do LinkedIn
-              <input type="text" name="linkedin" placeholder="Cole o link do seu perfil">
-            </label>
-            <label>Link de portfólio, currículo online ou site profissional
-              <input type="text" name="portfolio" placeholder="Cole o link">
-            </label>
-            <label>Último trabalho
-              <input type="text" name="ultimo_trabalho" placeholder="Empresa / função">
-            </label>
-            <label>Penúltimo trabalho
-              <input type="text" name="penultimo_trabalho" placeholder="Empresa / função">
-            </label>
-            <label>Anos de experiência
-              <input type="text" name="anos_experiencia" placeholder="Ex: 3 anos">
-            </label>
-            <label>Nível de inglês
-              <select name="nivel_ingles">
-                <option value="">Selecione uma opção</option>
-                <option value="Básico">Básico</option>
-                <option value="Intermediário">Intermediário</option>
-                <option value="Avançado">Avançado</option>
-                <option value="Fluente">Fluente</option>
-              </select>
-            </label>
-            <label>Fale um pouco sobre você
-              <textarea name="sobre_voce" rows="4" placeholder="Conte um pouco da sua trajetória"></textarea>
-            </label>
-            <label>Por que você quer esta vaga?
-              <textarea name="motivo_vaga" rows="4" placeholder="Conte por que tem interesse nessa oportunidade"></textarea>
-            </label>
-            <button type="submit" class="btn btn-orange">Enviar candidatura</button>
-            <p class="form-note">Formulário visual — o envio ainda será conectado em uma próxima etapa.</p>
+          <p>Preencha seu cadastro em poucas etapas rápidas. Leva menos de 2 minutos.</p>
+          <form class="lead-form form-robust wizard-form" id="generalJobsForm" novalidate>
+            <div class="wizard-progress">
+              <div class="wizard-progress-bar"><span id="wizardProgressFill"></span></div>
+              <p class="wizard-step-label" id="wizardStepLabel">Etapa 1 de 5</p>
+            </div>
+
+            <div class="wizard-step is-active" data-step="1">
+              <h4>Vamos começar por você</h4>
+              <p class="wizard-step-intro">Conte para nós como podemos entrar em contato.</p>
+              <label>Nome completo
+                <input type="text" name="nomeCompleto" placeholder="Digite seu nome" required>
+              </label>
+              <label>WhatsApp
+                <input type="tel" name="whatsapp" placeholder="Ex: +1 407 454 0102" required>
+              </label>
+              <label>E-mail
+                <input type="email" name="email" placeholder="seuemail@exemplo.com" required>
+              </label>
+              <label>Cidade
+                <input type="text" name="cidade" placeholder="Ex: Orlando" required>
+              </label>
+              <label>Estado
+                <input type="text" name="estado" placeholder="Ex: FL" required>
+              </label>
+              <p class="wizard-error" data-error-for="1"></p>
+              <div class="wizard-nav">
+                <button type="button" class="btn btn-outline wizard-next">Próximo</button>
+              </div>
+            </div>
+
+            <div class="wizard-step" data-step="2">
+              <h4>O que você está buscando?</h4>
+              <label>Vaga de interesse
+                <select name="vagaEscolhida">
+                  <option value="">Selecione uma opção</option>
+                  <option value="Live Service">Live Service</option>
+                  <option value="Social Commerce">Social Commerce</option>
+                  <option value="IA aplicada ao trabalho digital">IA aplicada ao trabalho digital</option>
+                  <option value="Banco de Talentos">Banco de Talentos</option>
+                  <option value="Outra">Outra</option>
+                </select>
+              </label>
+              <label>Disponibilidade
+                <select name="disponibilidade" required>
+                  <option value="">Selecione uma opção</option>
+                  <option value="Imediata">Imediata</option>
+                  <option value="Até 15 dias">Até 15 dias</option>
+                  <option value="Até 30 dias">Até 30 dias</option>
+                  <option value="A combinar">A combinar</option>
+                </select>
+              </label>
+              <label>Modelo de trabalho desejado
+                <select name="modeloTrabalho" required>
+                  <option value="">Selecione uma opção</option>
+                  <option value="Remoto">Remoto</option>
+                  <option value="Presencial">Presencial</option>
+                  <option value="Híbrido">Híbrido</option>
+                  <option value="Tenho flexibilidade">Tenho flexibilidade</option>
+                </select>
+              </label>
+              <p class="wizard-error" data-error-for="2"></p>
+              <div class="wizard-nav">
+                <button type="button" class="btn btn-outline wizard-back">Voltar</button>
+                <button type="button" class="btn btn-outline wizard-next">Próximo</button>
+              </div>
+            </div>
+
+            <div class="wizard-step" data-step="3">
+              <h4>Sua experiência mais recente</h4>
+              <p class="wizard-step-intro">Não precisa contar toda a sua trajetória agora. Queremos conhecer apenas sua experiência profissional mais recente.</p>
+              <label>Última empresa
+                <input type="text" name="ultimaEmpresa" placeholder="Nome da empresa" required>
+              </label>
+              <label>Função
+                <input type="text" name="funcao" placeholder="Seu cargo ou função" required>
+              </label>
+              <label>Atividades realizadas
+                <textarea name="atividades" rows="4" placeholder="Conte brevemente quais eram suas principais atividades."></textarea>
+              </label>
+              <p class="wizard-error" data-error-for="3"></p>
+              <div class="wizard-nav">
+                <button type="button" class="btn btn-outline wizard-back">Voltar</button>
+                <button type="button" class="btn btn-outline wizard-next">Próximo</button>
+              </div>
+            </div>
+
+            <div class="wizard-step" data-step="4">
+              <h4>Quase lá</h4>
+              <label>LinkedIn
+                <input type="text" name="linkedin" placeholder="https://www.linkedin.com/in/seu-perfil">
+              </label>
+              <label>Nível de inglês
+                <select name="nivelIngles" required>
+                  <option value="">Selecione uma opção</option>
+                  <option value="Não tenho conhecimento">Não tenho conhecimento</option>
+                  <option value="Básico">Básico</option>
+                  <option value="Intermediário">Intermediário</option>
+                  <option value="Avançado">Avançado</option>
+                  <option value="Fluente">Fluente</option>
+                </select>
+              </label>
+              <p class="wizard-error" data-error-for="4"></p>
+              <div class="wizard-nav">
+                <button type="button" class="btn btn-outline wizard-back">Voltar</button>
+                <button type="button" class="btn btn-outline wizard-next">Próximo</button>
+              </div>
+            </div>
+
+            <div class="wizard-step" data-step="5">
+              <h4>Queremos conhecer você</h4>
+              <label>Fale um pouco sobre você
+                <textarea name="sobreVoce" rows="4" placeholder="Conte brevemente sobre você, seus objetivos profissionais ou o tipo de oportunidade que está buscando."></textarea>
+              </label>
+              <p class="wizard-error" data-error-for="5"></p>
+              <div class="wizard-nav">
+                <button type="button" class="btn btn-outline wizard-back">Voltar</button>
+                <button type="submit" class="btn btn-orange wizard-submit">Enviar cadastro</button>
+              </div>
+            </div>
+
+            <p class="form-note" id="generalJobsFormMessage"></p>
           </form>
         </div>
       </div></section>
