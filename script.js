@@ -262,3 +262,36 @@ if (generalJobsForm) {
 
   showStep(currentStep);
 }
+
+
+// ---------- NAVEGAÇÃO PROGRESSIVA (MOSTRAR/ESCONDER SEÇÕES) ----------
+(function () {
+  function sectionFor(id) {
+    var el = document.getElementById(id);
+    if (!el) return null;
+    return el.tagName === 'SECTION' ? el : el.closest('section');
+  }
+
+  function revealFlowSection(id) {
+    var sec = sectionFor(id);
+    if (sec && sec.classList.contains('flow-hidden')) {
+      sec.classList.remove('flow-hidden');
+    }
+  }
+
+  function revealFromHash() {
+    if (window.location.hash) {
+      revealFlowSection(window.location.hash.substring(1));
+    }
+  }
+
+  document.addEventListener('click', function (event) {
+    var link = event.target.closest('a[href^="#"]');
+    if (!link) return;
+    var targetId = link.getAttribute('href').substring(1);
+    if (targetId) revealFlowSection(targetId);
+  });
+
+  window.addEventListener('hashchange', revealFromHash);
+  revealFromHash();
+})();
