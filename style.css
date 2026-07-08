@@ -223,11 +223,11 @@ section { padding: 86px 0; }
 .live-section .section-head p, .live-section .check { color: rgba(255,255,255,0.72); }
 .live-section .check b { color: var(--white); }
 .timeline { display: grid; gap: 16px; margin-top: 28px; }
-.timeline-item { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 22px; padding: 20px; }
-.timeline-item strong { display: block; color: #fed7aa; margin-bottom: 6px; font-size: 0.9rem; }
+.timeline-item { background: var(--light); border: 1px solid var(--line); border-radius: 22px; padding: 20px; }
+.timeline-item strong { display: block; color: var(--orange-dark); margin-bottom: 6px; font-size: 0.9rem; }
 .timeline-item h4 { margin-bottom: 4px; font-size: 1.08rem; }
-.timeline-item p { color: rgba(255,255,255,0.70); font-size: 0.95rem; }
-.timeline-closing { margin-top: 22px; font-size: 1.05rem; font-weight: 650; color: var(--white); text-align: center; line-height: 1.5; }
+.timeline-item p { color: var(--gray); font-size: 0.95rem; line-height: 1.55; }
+.timeline-closing { margin-top: 22px; font-size: 1.05rem; font-weight: 650; color: var(--dark); text-align: center; line-height: 1.5; }
 .timeline-item p + p { margin-top: 10px; }
 
 /* ---------- FORMULÁRIO ---------- */
