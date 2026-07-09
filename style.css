@@ -234,6 +234,8 @@ section { padding: 86px 0; }
 .flow-hidden { display: none !important; }
 section:not(.flow-hidden) { animation: flowFadeIn 0.45s ease; }
 @keyframes flowFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.future-hidden { display: none !important; }
+.jobs-grid:has(.job-card + .future-hidden) { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
 
 /* ---------- FORMULÁRIO ---------- */
 .form-box { background: var(--white); color: var(--dark); border-radius: 32px; padding: 30px; box-shadow: var(--shadow); position: sticky; top: 104px; }
