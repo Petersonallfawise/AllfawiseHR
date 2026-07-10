@@ -58,7 +58,7 @@ if (leadForm) {
         body: formData,
       });
 
-      formMessage.textContent = "Cadastro enviado com sucesso. A Allfawise entrará em contato.";
+      formMessage.textContent = "Cadastro recebido com sucesso. Obrigado pelo seu interesse em participar da triagem para Live Seller. Nossa equipe poderá entrar em contato pelo WhatsApp caso seu perfil avance para a próxima etapa.";
       formMessage.classList.add("success");
       leadForm.reset();
     } catch (error) {
