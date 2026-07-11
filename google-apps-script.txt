@@ -25,8 +25,13 @@ NÃO misture esta planilha com a planilha "Creative Intelligence Lab"
 ======================================================= */
 
 function doPost(e) {
-  var data = JSON.parse(e.postData.contents);
-  var formType = data.formType || '';
+    var data;
+  try {
+    data = JSON.parse(e.postData.contents);
+  } catch (err) {
+    data = e.parameter || {};
+  }
+var formType = data.formType || '';
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var now = new Date();
   var sheet;
