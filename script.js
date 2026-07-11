@@ -9,6 +9,20 @@ tiktok, instagram, mensagem). Isso quebraria a conexão com a planilha.
 // EDITAR URL DO APPS SCRIPT: cole aqui a URL de implantação do seu Google Apps Script, se precisar trocar
 // ATENÇÃO: URL existente do formulário Live Seller. Não trocar sem confirmação explícita do responsável pelo projeto.
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzvKWBJQAJACMckVDRrjjrWKAWYHv6Aib857JIK_XK_7GrhYJvT-d1lnEz5sQlTot3K/exec";
+const WHATSAPP_NUMBER = "14074540102";
+
+function showWhatsAppConfirmation(messageElement, statusText, whatsappText) {
+if (!messageElement) return;
+
+const whatsappLink = document.createElement("a");
+whatsappLink.className = "whatsapp-confirmation";
+whatsappLink.href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(whatsappText);
+whatsappLink.target = "_blank";
+whatsappLink.rel = "noopener";
+whatsappLink.textContent = "Confirmar pelo WhatsApp";
+
+messageElement.replaceChildren(document.createTextNode(statusText), whatsappLink);
+}
 
 // ---------- MENU MOBILE ----------
 const mobileToggle = document.getElementById("mobileToggle");
@@ -52,6 +66,7 @@ formMessage.textContent = "Enviando seus dados...";
 
 try {
 const formData = new FormData(leadForm);
+const candidateName = formData.get("nome") || "";
 
 await fetch(GOOGLE_SCRIPT_URL, {
 method: "POST",
@@ -59,7 +74,11 @@ mode: "no-cors",
 body: formData,
 });
 
-formMessage.textContent = "Cadastro enviado com sucesso. A Allfawise entrará em contato.";
+showWhatsAppConfirmation(
+formMessage,
+"Cadastro enviado para processamento. Se desejar, confirme o envio diretamente com nossa equipe.",
+"Olá, Allfawise! Acabei de enviar meu cadastro para Live Seller. Meu nome é " + candidateName + "."
+);
 formMessage.classList.add("success");
 leadForm.reset();
 } catch (error) {
@@ -236,7 +255,11 @@ body: JSON.stringify(payload),
 });
 
 if (generalFormMessage) {
-generalFormMessage.textContent = 'Cadastro recebido! Obrigado pelo seu interesse. Nossa equipe analisará suas informações e poderá entrar em contato quando identificarmos uma oportunidade compatível com o seu perfil.';
+showWhatsAppConfirmation(
+generalFormMessage,
+'Cadastro enviado para processamento. Se desejar, confirme o envio diretamente com nossa equipe.',
+'Olá, Allfawise! Acabei de enviar meu cadastro para outras vagas. Meu nome é ' + payload.nomeCompleto + ' e tenho interesse em ' + (payload.vagaEscolhida || 'oportunidades profissionais') + '.'
+);
 generalFormMessage.classList.add('success');
 }
 
@@ -298,6 +321,8 @@ companyQuoteFormMessage.textContent = 'Enviando solicitação...';
 
 try {
 const formData = new FormData(companyQuoteForm);
+const companyName = formData.get('empresa_nome') || '';
+const contactName = formData.get('responsavel') || '';
 
 await fetch(COMPANY_SCRIPT_URL, {
 method: 'POST',
@@ -306,7 +331,11 @@ body: formData,
 });
 
 if (companyQuoteFormMessage) {
-companyQuoteFormMessage.textContent = 'Solicitação recebida com sucesso. Nossa equipe fará uma confirmação humana e entrará em contato em breve.';
+showWhatsAppConfirmation(
+companyQuoteFormMessage,
+'Solicitação enviada para processamento. Se desejar, confirme o pedido diretamente com nossa equipe.',
+'Olá, Allfawise! Acabei de enviar uma solicitação de orçamento pela empresa ' + companyName + '. Meu nome é ' + contactName + '.'
+);
 companyQuoteFormMessage.classList.add('success');
 }
 companyQuoteForm.reset();

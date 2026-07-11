@@ -24,21 +24,34 @@ NÃO misture esta planilha com a planilha "Creative Intelligence Lab"
 (pesquisa/conteúdo). Nenhum dado pessoal de candidato deve ir para lá.
 ======================================================= */
 
+function safeCell(value) {
+  if (value === null || value === undefined) return '';
+  var text = String(value);
+  return /^[=+\-@]/.test(text) ? "'" + text : text;
+}
+
+function appendSafeRow(sheet, values) {
+  if (!sheet) throw new Error('Aba de destino não encontrada.');
+  sheet.appendRow(values.map(function (value) {
+    return value instanceof Date ? value : safeCell(value);
+  }));
+}
+
 function doPost(e) {
-    var data;
+  var data;
   try {
     data = JSON.parse(e.postData.contents);
   } catch (err) {
     data = e.parameter || {};
   }
-var formType = data.formType || '';
+  var formType = data.formType || '';
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var now = new Date();
   var sheet;
 
   if (formType === 'live_seller') {
     sheet = ss.getSheetByName('Leads Live Seller');
-    sheet.appendRow([
+    appendSafeRow(sheet, [
       'LS-' + now.getTime(),
       now,
       data.nome || '',
@@ -56,7 +69,7 @@ var formType = data.formType || '';
     ]);
   } else if (formType === 'outras_vagas') {
     sheet = ss.getSheetByName('Leads Outras Vagas');
-    sheet.appendRow([
+    appendSafeRow(sheet, [
       'OV-' + now.getTime(),
       now,
       data.nomeCompleto || '',
@@ -76,7 +89,7 @@ var formType = data.formType || '';
     ]);
   } else if (formType === 'empresas') {
     sheet = ss.getSheetByName('Leads Empresas');
-    sheet.appendRow([
+    appendSafeRow(sheet, [
       'EMP-' + now.getTime(),
       now,
       data.empresa_nome || '',

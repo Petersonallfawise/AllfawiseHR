@@ -348,6 +348,25 @@ footer b { color: white; }
   font-weight: 600;
 }
 
+.whatsapp-confirmation {
+  display: flex;
+  width: fit-content;
+  min-height: 44px;
+  margin: 12px auto 0;
+  padding: 10px 18px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #16a34a;
+  color: var(--white);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.whatsapp-confirmation:hover {
+  background: #15803d;
+}
+
 @media (max-width: 680px) {
   .lead-form select {
     background-position: calc(100% - 16px) calc(1em + 2px), calc(100% - 11px) calc(1em + 2px);
