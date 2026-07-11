@@ -1,28 +1,24 @@
 /* =======================================================
-ALLFAWISE — Apps Script receptor unificado (nova planilha operacional)
-Planilha: "Base Operacional Allfawise" (Leads Live Seller / Leads Outras
-Vagas / Leads Empresas / Dashboard / Como usar / Listas).
+ALLFAWISE — Apps Script receptor unificado (planilha "AllfawiseHR — Leads e Triagem")
+Abas confirmadas na planilha: Leads Live Seller, Leads Outras Vagas,
+Leads Empresas, Dashboard, Como usar, Listas.
 
 IMPORTANTE (ação manual necessária antes de usar):
-1. Abra Extensões > Apps Script na planilha operacional nova e cole este
-   código no lugar do conteúdo padrão (Code.gs).
+1. Abra Extensões > Apps Script NA PRÓPRIA planilha operacional e cole
+   este código no lugar do conteúdo padrão (Code.gs).
 2. Em "Implantar" > "Nova implantação" > tipo "Aplicativo da Web",
    execute como "Eu" e acesso "Qualquer pessoa", depois copie a URL
    gerada (.../exec).
-3. Cole essa URL em script.js nas constantes indicadas (GOOGLE_SCRIPT_URL
-   para Live Seller somente após validar com o responsável do projeto;
-   GENERAL_JOBS_SCRIPT_URL para Outras Vagas; COMPANY_SCRIPT_URL para
-   Empresas).
-4. Garanta que a planilha tenha exatamente estas abas: "Leads Live
-   Seller", "Leads Outras Vagas", "Leads Empresas".
-5. Na aba "Leads Live Seller", adicione manualmente estas colunas extras
-   após as colunas preenchidas automaticamente, para a triagem manual da
-   equipe: Status | Comunicação | Conforto com câmera | Experiência em
-   vendas | Interesse real | Pontuação total | Observações | Data do
-   contato | Resultado do contato.
-   Sugestão de fórmula para "Pontuação total" (ajuste as letras das
-   colunas conforme onde ficarem Comunicação/Conforto/Experiência/
-   Interesse real): =SOMA(N2;O2;P2;Q2)
+3. Cole essa URL em script.js nas constantes indicadas: GOOGLE_SCRIPT_URL
+   (Live Seller — somente após validar com o responsável do projeto,
+   pois já existe uma URL em produção), GENERAL_JOBS_SCRIPT_URL (Outras
+   Vagas) e COMPANY_SCRIPT_URL (Empresas).
+4. As abas já existem com os cabeçalhos corretos — não é necessário
+   criar colunas nas abas de leads. As colunas manuais de triagem do
+   Live Seller (Status, Comunicação, Conforto com câmera, Experiência em
+   vendas, Interesse real, Pontuação total, Observações, Data do
+   contato, Resultado do contato) e a fórmula de Pontuação total já
+   estão configuradas na aba "Leads Live Seller".
 
 NÃO misture esta planilha com a planilha "Creative Intelligence Lab"
 (pesquisa/conteúdo). Nenhum dado pessoal de candidato deve ir para lá.
@@ -32,12 +28,14 @@ function doPost(e) {
   var data = JSON.parse(e.postData.contents);
   var formType = data.formType || '';
   var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var now = new Date();
   var sheet;
 
   if (formType === 'live_seller') {
     sheet = ss.getSheetByName('Leads Live Seller');
     sheet.appendRow([
-      new Date(),
+      'LS-' + now.getTime(),
+      now,
       data.nome || '',
       data.whatsapp || '',
       data.cidade || '',
@@ -54,7 +52,8 @@ function doPost(e) {
   } else if (formType === 'outras_vagas') {
     sheet = ss.getSheetByName('Leads Outras Vagas');
     sheet.appendRow([
-      new Date(),
+      'OV-' + now.getTime(),
+      now,
       data.nomeCompleto || '',
       data.whatsapp || '',
       data.email || '',
@@ -73,7 +72,8 @@ function doPost(e) {
   } else if (formType === 'empresas') {
     sheet = ss.getSheetByName('Leads Empresas');
     sheet.appendRow([
-      new Date(),
+      'EMP-' + now.getTime(),
+      now,
       data.empresa_nome || '',
       data.responsavel || '',
       data.cargo || '',
