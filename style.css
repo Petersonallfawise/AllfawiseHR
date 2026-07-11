@@ -491,3 +491,27 @@ footer b { color: white; }
   .wizard-nav button { width: 100%; }
   .wizard-step-label { text-align: left; }
 }
+
+
+/* ---------- FOTO LIVE SELLER (KYRIOS) ---------- */
+.live-photo {
+margin: 22px 0;
+border-radius: 24px;
+overflow: hidden;
+box-shadow: var(--shadow);
+border: 1px solid var(--line);
+background: var(--white);
+}
+.live-photo img {
+width: 100%;
+height: auto;
+display: block;
+}
+.live-photo-caption {
+padding: 10px 16px;
+font-size: 0.82rem;
+color: var(--gray);
+text-align: center;
+background: var(--light);
+margin: 0;
+}
