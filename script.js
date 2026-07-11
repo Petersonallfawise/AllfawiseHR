@@ -265,10 +265,8 @@ showStep(currentStep);
 }
 
 // ---------- FORMULÁRIO DE ORÇAMENTO (EMPRESAS — companyQuoteForm) ----------
-// ATENÇÃO: este formulário ainda depende da URL do Apps Script ser publicada abaixo.
-// Enquanto a URL não for definida (após a implantação do Apps Script na nova planilha),
-// o formulário mostra uma mensagem de pendência em vez de simular um envio de sucesso.
-const COMPANY_SCRIPT_URL = 'COLE_AQUI_URL_DO_APPS_SCRIPT_EMPRESAS';
+// URL do Apps Script (Empresas) implantada e conectada à planilha "AllfawiseHR — Leads e Triagem".
+const COMPANY_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSmV7LcNDQqOjIlOC69CdO4TV-Z7G93dFOoN_V4Sdw7BCxY39BW4dsqjTJZ967QgIz/exec';
 
 const companyQuoteForm = document.getElementById('companyQuoteForm');
 const companyQuoteFormMessage = document.getElementById('companyQuoteFormMessage');
