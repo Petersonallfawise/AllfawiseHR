@@ -53,6 +53,8 @@ const leadMessage = document.getElementById("formMessage");
 if (leadForm) {
   leadForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    const mensagemField = leadForm.querySelector('[name="mensagem"]');
+    if (mensagemField) mensagemField.value = "Interesse declarado: deseja receber informações e os próximos passos pelo WhatsApp e Canal oficial.";
     const unlock = lockSubmit(leadForm, "Enviando cadastro...");
     setMessage(leadMessage, "Enviando seus dados...");
     try {
