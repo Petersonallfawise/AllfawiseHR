@@ -107,18 +107,21 @@
         <div class="form-intro"><p>04 / CADASTRO</p><h2>Descubra se você tem perfil para Live Seller.</h2><span>Leva poucos minutos. Responda com sinceridade para que a equipe conheça melhor o seu momento.</span><small>Se seu perfil avançar, o contato será feito pelo WhatsApp informado no cadastro.</small></div>
         <div class="form-box">
           <form class="lead-form" id="leadForm">
-            <input type="hidden" name="formType" value="live_seller">
+                          <input type="hidden" name="formType" value="live_seller">
             <label>Nome completo<input type="text" name="nome" placeholder="Digite seu nome" required></label>
             <label>WhatsApp<input type="tel" name="whatsapp" placeholder="Ex.: +55 11 99999-9999" required></label>
-            <div class="grid-2"><label>Cidade<input type="text" name="cidade" required></label><label>Estado<input type="text" name="estado" required></label></div>
-            <label>Idade<input type="number" name="idade" min="1" required></label>
-            <label>Você se considera uma pessoa comunicativa?<select name="comunicativa" required><option value="">Selecione uma opção</option><option value="Sim">Sim</option><option value="Mais ou menos">Mais ou menos</option><option value="Ainda tenho dificuldade, mas quero aprender">Ainda tenho dificuldade, mas quero aprender</option></select></label>
-            <label>Você tem celular com câmera e internet?<select name="tem_celular" required><option value="">Selecione uma opção</option><option value="Sim">Sim</option><option value="Não">Não</option></select></label>
-            <label>Você gostaria de trabalhar de casa usando o celular?<select name="trabalhar_casa" required><option value="">Selecione uma opção</option><option value="Sim">Sim</option><option value="Talvez, quero entender melhor">Talvez, quero entender melhor</option><option value="Não">Não</option></select></label>
-            <label>Você já tem experiência com vendas, atendimento, lives ou redes sociais?<select name="experiencia" required><option value="">Selecione uma opção</option><option value="Sim, com vendas">Sim, com vendas</option><option value="Sim, com atendimento">Sim, com atendimento</option><option value="Sim, com redes sociais">Sim, com redes sociais</option><option value="Sim, com lives">Sim, com lives</option><option value="Não, mas quero aprender">Não, mas quero aprender</option></select></label>
-            <div class="grid-2"><label>TikTok <small>opcional</small><input type="text" name="tiktok" placeholder="@seuperfil"></label><label>Instagram <small>opcional</small><input type="text" name="instagram" placeholder="@seuperfil"></label></div>
-            <label>Por que você quer participar?<textarea name="mensagem" rows="4" placeholder="Conte brevemente sobre seu interesse."></textarea></label>
-            <button class="btn btn-accent" type="submit">Enviar cadastro</button>
+            <input type="hidden" name="cidade" value="">
+            <input type="hidden" name="estado" value="">
+            <input type="hidden" name="idade" value="">
+            <input type="hidden" name="comunicativa" value="">
+            <input type="hidden" name="tem_celular" value="">
+            <input type="hidden" name="trabalhar_casa" value="">
+            <input type="hidden" name="experiencia" value="">
+            <input type="hidden" name="tiktok" value="">
+            <input type="hidden" name="instagram" value="">
+            <input type="hidden" name="mensagem" value="">
+            <label class="consent-check"><input type="checkbox" name="consentimento" required> Quero receber informações e os próximos passos sobre Live Seller pelo WhatsApp e pelo Canal oficial da Allfawise. Entendo que este cadastro não garante contratação.</label>
+            <button class="btn btn-accent" type="submit">Quero receber informações</button>
             <p class="form-note" id="formMessage">Seus dados serão usados apenas para contato sobre esta oportunidade.</p>
             <a class="channel-success-link" data-channel-link href="#canal" aria-disabled="true" hidden>Quero acompanhar pelo Canal oficial do WhatsApp →</a>
           </form>
