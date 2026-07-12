@@ -8,6 +8,7 @@
   <meta property="og:title" content="Allfawise | Triagem para Live Seller">
   <meta property="og:description" content="Descubra se você tem perfil para aprender Live Seller.">
   <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="assets/allfawise-logo.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,11 +17,12 @@
   </div>
   <header>
     <div class="container nav">
-      <a class="brand" href="#inicio" aria-label="Allfawise, início"><span class="brand-mark">A</span><span>allfawise</span></a>
+      <a class="brand" href="#inicio" aria-label="Allfawise, início"><img class="brand-logo" src="assets/allfawise-logo.png" alt=""><span>allfawise</span></a>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
       <nav class="nav-links" id="navLinks">
         <a href="#oportunidade">A oportunidade</a>
         <a href="#como-funciona">Como funciona</a>
+        <a href="#canal">Canal oficial</a>
         <a href="#empresas">Para empresas</a>
         <a class="btn btn-accent" href="#cadastro">Participar da triagem</a>
       </nav>
@@ -84,6 +86,22 @@
         <p class="disclaimer">Preencher o cadastro não garante contratação imediata. Esta é uma triagem para identificar pessoas com perfil comunicativo e interesse em aprender uma nova habilidade digital.</p>
       </div>
     </section>
+    <section id="canal" class="section channel-section">
+      <div class="container channel-layout">
+        <div>
+          <p class="eyebrow">CANAL OFICIAL NO WHATSAPP</p>
+          <h2>Fique por dentro das próximas etapas.</h2>
+          <p>Depois do cadastro, você pode seguir o canal oficial da Allfawise para acompanhar informações sobre Live Seller, o processo de triagem e futuras atualizações.</p>
+        </div>
+        <div class="channel-card">
+          <div class="channel-icon" aria-hidden="true">↗</div>
+          <h3>Allfawise | Live Seller</h3>
+          <p>Um canal de avisos. Sem conversa em grupo e sem exposição do seu número a outros participantes.</p>
+          <a class="btn btn-accent channel-link" data-channel-link href="#canal" aria-disabled="true">Canal em breve</a>
+          <small>Seguir o canal é opcional e não garante contratação.</small>
+        </div>
+      </div>
+    </section>
     <section id="cadastro" class="section form-section">
       <div class="container form-layout">
         <div class="form-intro"><p>04 / CADASTRO</p><h2>Descubra se você tem perfil para Live Seller.</h2><span>Leva poucos minutos. Responda com sinceridade para que a equipe conheça melhor o seu momento.</span><small>Se seu perfil avançar, o contato será feito pelo WhatsApp informado no cadastro.</small></div>
@@ -102,6 +120,7 @@
             <label>Por que você quer participar?<textarea name="mensagem" rows="4" placeholder="Conte brevemente sobre seu interesse."></textarea></label>
             <button class="btn btn-accent" type="submit">Enviar cadastro</button>
             <p class="form-note" id="formMessage">Seus dados serão usados apenas para contato sobre esta oportunidade.</p>
+            <a class="channel-success-link" data-channel-link href="#canal" aria-disabled="true" hidden>Quero acompanhar pelo Canal oficial do WhatsApp →</a>
           </form>
         </div>
       </div>

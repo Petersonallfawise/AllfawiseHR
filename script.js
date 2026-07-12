@@ -2,6 +2,10 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzvKWBJQAJACM
 const GENERAL_JOBS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzdTXpX1-VH15wLep1_n7zBJtrpyCI78N5ZvrYZT4k3WZ7zMr36fx7BO87o7BLX8sYH5g/exec";
 const COMPANY_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzSmV7LcNDQqOjIlOC69CdO4TV-Z7G93dFOoN_V4Sdw7BCxY39BW4dsqjTJZ967QgIz/exec";
 
+// Cole aqui o link criado pelo WhatsApp para o Canal oficial da Allfawise.
+// Exemplo: https://whatsapp.com/channel/0123456789ABCDEF
+const WHATSAPP_CHANNEL_URL = "https://whatsapp.com/channel/0029Vb8bxZLKbYMMlBSE8902";
+
 const toggle = document.getElementById("mobileToggle");
 const nav = document.getElementById("navLinks");
 if (toggle && nav) {
@@ -31,6 +35,19 @@ function lockSubmit(form, busyText) {
   return () => { button.disabled = false; button.textContent = originalText; };
 }
 
+const channelLinks = document.querySelectorAll("[data-channel-link]");
+function configureChannelLinks() {
+  if (!WHATSAPP_CHANNEL_URL) return;
+  channelLinks.forEach((link) => {
+    link.href = WHATSAPP_CHANNEL_URL;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.removeAttribute("aria-disabled");
+    if (link.classList.contains("channel-link")) link.textContent = "Seguir o Canal oficial";
+  });
+}
+configureChannelLinks();
+
 const leadForm = document.getElementById("leadForm");
 const leadMessage = document.getElementById("formMessage");
 if (leadForm) {
@@ -42,6 +59,13 @@ if (leadForm) {
       await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", body: new FormData(leadForm) });
       leadForm.reset();
       setMessage(leadMessage, "Cadastro recebido com sucesso. Obrigado pelo seu interesse em participar da triagem para Live Seller. Nossa equipe poderá entrar em contato pelo WhatsApp caso seu perfil avance para a próxima etapa.", "success");
+      if (WHATSAPP_CHANNEL_URL) {
+        const channelSuccessLink = leadForm.querySelector(".channel-success-link");
+        if (channelSuccessLink) {
+          channelSuccessLink.hidden = false;
+          channelSuccessLink.classList.add("visible");
+        }
+      }
     } catch (error) {
       setMessage(leadMessage, "Não foi possível enviar seus dados agora. Tente novamente em alguns instantes.", "error");
     } finally { unlock(); }
