@@ -6,6 +6,54 @@ const COMPANY_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzSmV7LcNDQq
 // Exemplo: https://whatsapp.com/channel/0123456789ABCDEF
 const WHATSAPP_CHANNEL_URL = "https://whatsapp.com/channel/0029Vb8bxZLKbYMMlBSE8902";
 
+// --- Rastreamento: atribuição de origem (GA4) ---
+const ATTRIBUTION_STORAGE_KEY = "allfawise_attribution";
+const ATTRIBUTION_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000; // 30 dias
+
+function readStoredAttribution() {
+  try {
+    const raw = localStorage.getItem(ATTRIBUTION_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || !parsed.savedAt || !parsed.source) return null;
+    if (Date.now() - parsed.savedAt > ATTRIBUTION_MAX_AGE_MS) {
+      localStorage.removeItem(ATTRIBUTION_STORAGE_KEY);
+      return null;
+    }
+    return parsed;
+  } catch (error) {
+    return null;
+  }
+}
+
+function captureAttribution() {
+  const stored = readStoredAttribution();
+  if (stored) return stored;
+
+  const params = new URLSearchParams(window.location.search);
+  const utmSource = params.get("utm_source");
+
+  if (utmSource) {
+    const fresh = {
+      source: utmSource,
+      medium: params.get("utm_medium") || "",
+      campaign: params.get("utm_campaign") || "",
+      content: params.get("utm_content") || "",
+      savedAt: Date.now(),
+    };
+    try {
+      localStorage.setItem(ATTRIBUTION_STORAGE_KEY, JSON.stringify(fresh));
+    } catch (error) {
+      /* localStorage indisponível: segue apenas em memória, sem persistir */
+    }
+    return fresh;
+  }
+
+  return { source: "direto", medium: "", campaign: "", content: "", savedAt: null };
+}
+
+const attribution = captureAttribution();
+
 const toggle = document.getElementById("mobileToggle");
 const nav = document.getElementById("navLinks");
 if (toggle && nav) {
@@ -44,6 +92,15 @@ function configureChannelLinks() {
     link.rel = "noopener noreferrer";
     link.removeAttribute("aria-disabled");
     if (link.classList.contains("channel-link")) link.textContent = "Seguir o Canal oficial";
+    link.addEventListener("click", () => {
+      if (typeof gtag === "function") {
+        gtag("event", "click_whatsapp_channel", {
+          source: attribution.source,
+          campaign: attribution.campaign,
+          content: attribution.content,
+        });
+      }
+    });
   });
 }
 configureChannelLinks();
@@ -54,13 +111,28 @@ if (leadForm) {
   leadForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const mensagemField = leadForm.querySelector('[name="mensagem"]');
-    if (mensagemField) mensagemField.value = "Interesse declarado: deseja receber informações e os próximos passos pelo WhatsApp e Canal oficial.";
+    if (mensagemField) {
+      mensagemField.value =
+        "Interesse declarado: deseja receber informações e os próximos passos pelo WhatsApp e Canal oficial." +
+        " | Origem: " + attribution.source +
+        " | Meio: " + (attribution.medium || "-") +
+        " | Campanha: " + (attribution.campaign || "-") +
+        " | Conteúdo: " + (attribution.content || "-");
+    }
     const unlock = lockSubmit(leadForm, "Enviando cadastro...");
     setMessage(leadMessage, "Enviando seus dados...");
     try {
       await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", body: new FormData(leadForm) });
       leadForm.reset();
       setMessage(leadMessage, "Cadastro recebido com sucesso. Obrigado pelo seu interesse em participar da triagem para Live Seller. Nossa equipe poderá entrar em contato pelo WhatsApp caso seu perfil avance para a próxima etapa.", "success");
+      if (typeof gtag === "function") {
+        gtag("event", "generate_lead", {
+          source: attribution.source,
+          medium: attribution.medium,
+          campaign: attribution.campaign,
+          content: attribution.content,
+        });
+      }
       if (WHATSAPP_CHANNEL_URL) {
         const channelSuccessLink = leadForm.querySelector(".channel-success-link");
         if (channelSuccessLink) {
