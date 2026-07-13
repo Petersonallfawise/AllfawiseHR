@@ -1,22 +1,115 @@
-function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var data = JSON.parse(e.postData.contents);
+/* =======================================================
+ALLFAWISE — Apps Script receptor unificado (planilha "AllfawiseHR — Leads e Triagem")
+Abas confirmadas na planilha: Leads Live Seller, Leads Outras Vagas,
+Leads Empresas, Dashboard, Como usar, Listas.
 
-  sheet.appendRow([
-    new Date(),
-    data.nome || "",
-    data.whatsapp || "",
-    data.cidade || "",
-    data.estado || "",
-    data.idade || "",
-    data.comunicativa || "",
-    data.temCelular || "",
-    data.trabalharCasa || "",
-    data.experiencia || "",
-    data.mensagem || ""
-  ]);
+IMPORTANTE (ação manual necessária antes de usar):
+1. Abra Extensões > Apps Script NA PRÓPRIA planilha operacional e cole
+   este código no lugar do conteúdo padrão (Code.gs).
+2. Em "Implantar" > "Nova implantação" > tipo "Aplicativo da Web",
+   execute como "Eu" e acesso "Qualquer pessoa", depois copie a URL
+   gerada (.../exec).
+3. Cole essa URL em script.js nas constantes indicadas: GOOGLE_SCRIPT_URL
+   (Live Seller — somente após validar com o responsável do projeto,
+   pois já existe uma URL em produção), GENERAL_JOBS_SCRIPT_URL (Outras
+   Vagas) e COMPANY_SCRIPT_URL (Empresas).
+4. As abas já existem com os cabeçalhos corretos — não é necessário
+   criar colunas nas abas de leads. As colunas manuais de triagem do
+   Live Seller (Status, Comunicação, Conforto com câmera, Experiência em
+   vendas, Interesse real, Pontuação total, Observações, Data do
+   contato, Resultado do contato) e a fórmula de Pontuação total já
+   estão configuradas na aba "Leads Live Seller".
+
+NÃO misture esta planilha com a planilha "Creative Intelligence Lab"
+(pesquisa/conteúdo). Nenhum dado pessoal de candidato deve ir para lá.
+======================================================= */
+
+function safeCell(value) {
+  if (value === null || value === undefined) return '';
+  var text = String(value);
+  return /^[=+\-@]/.test(text) ? "'" + text : text;
+}
+
+function appendSafeRow(sheet, values) {
+  if (!sheet) throw new Error('Aba de destino não encontrada.');
+  sheet.appendRow(values.map(function (value) {
+    return value instanceof Date ? value : safeCell(value);
+  }));
+}
+
+function doPost(e) {
+  var data;
+  try {
+    data = JSON.parse(e.postData.contents);
+  } catch (err) {
+    data = e.parameter || {};
+  }
+  var formType = data.formType || '';
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var now = new Date();
+  var sheet;
+
+  if (formType === 'live_seller') {
+    sheet = ss.getSheetByName('Leads Live Seller');
+    appendSafeRow(sheet, [
+      'LS-' + now.getTime(),
+      now,
+      data.nome || '',
+      data.whatsapp || '',
+      data.cidade || '',
+      data.estado || '',
+      data.idade || '',
+      data.comunicativa || '',
+      data.tem_celular || '',
+      data.trabalhar_casa || '',
+      data.experiencia || '',
+      data.tiktok || '',
+      data.instagram || '',
+      data.mensagem || ''
+    ]);
+  } else if (formType === 'outras_vagas') {
+    sheet = ss.getSheetByName('Leads Outras Vagas');
+    appendSafeRow(sheet, [
+      'OV-' + now.getTime(),
+      now,
+      data.nomeCompleto || '',
+      data.whatsapp || '',
+      data.email || '',
+      data.cidade || '',
+      data.estado || '',
+      data.vagaEscolhida || '',
+      data.disponibilidade || '',
+      data.modeloTrabalho || '',
+      data.ultimaEmpresa || '',
+      data.funcao || '',
+      data.atividades || '',
+      data.linkedin || '',
+      data.nivelIngles || '',
+      data.sobreVoce || ''
+    ]);
+  } else if (formType === 'empresas') {
+    sheet = ss.getSheetByName('Leads Empresas');
+    appendSafeRow(sheet, [
+      'EMP-' + now.getTime(),
+      now,
+      data.empresa_nome || '',
+      data.responsavel || '',
+      data.cargo || '',
+      data.email_corporativo || '',
+      data.whatsapp_empresa || '',
+      data.site_rede || '',
+      data.tipo_talento || '',
+      data.qtd_vagas || '',
+      data.tipo_servico || '',
+      data.mensagem_empresa || ''
+    ]);
+  } else {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'error', message: 'formType invalido ou ausente' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
 
   return ContentService
-    .createTextOutput(JSON.stringify({ status: "success" }))
+    .createTextOutput(JSON.stringify({ status: 'success' }))
     .setMimeType(ContentService.MimeType.JSON);
 }
